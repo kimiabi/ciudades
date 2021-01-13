@@ -14,6 +14,7 @@
             <b-form-input
               id="input-email"
               type="email"
+              v-model="email"
               placeholder="Ingresar email"
               required
             >
@@ -26,7 +27,9 @@
           >
             <b-form-input
               id="input-contrasena"
+              v-model="password"
               type="password"
+
               placeholder="Ingresar tu contrasena"
               required
             >
@@ -40,7 +43,13 @@
 </template>
 <script>
 export default {
-  name:'Login'
+  name:'Login',
+  data(){
+    return {
+        email:null,
+        password:null
+    }
+  }
 }
 </script>
 <style scoped>
