@@ -1,8 +1,10 @@
 <template>
   <b-container>
     <NavBarciudades></NavBarciudades>
-    <h1>Hola mundo soy la pagina ciudades</h1>
     <b-card>
+      <template #header>
+        <h2 class="mb-0">Paises</h2>
+      </template>
       <b-card-body>
         <datatable :data="data" :columns="columns" :actions="actions" :loading="spinner" :index="false"></datatable>
       </b-card-body>
@@ -32,7 +34,7 @@ export default {
           {name:"population", th:"population"},
         ],
         actions:[
-          { text:"Ver Ficha",color:"primary",action:(row)=>{this.getFichaCiudad(row.alpha3Code);}}
+          { text:"Ver Ficha",color:"primary",action:(row)=>{this.verFichaCiudad(row.alpha3Code);}}
         ]
       }
     },
@@ -58,22 +60,8 @@ export default {
           console.error(error);
         });        
       },
-      getFichaCiudad(countryCode){
-        var self = this;
-        const options = {
-          method: 'GET',
-          url: 'https://restcountries-v1.p.rapidapi.com/alpha/'+countryCode,
-          headers: {
-            'x-rapidapi-key': '3ec7cba7c7msh40aa2fdd63bba9fp1e761djsn1732358e0c81',
-            'x-rapidapi-host': 'restcountries-v1.p.rapidapi.com'
-          }
-        };
-        axios.request(options).then(function (response) {
-          self.fichaPais = response.data;
-          console.log("Pais "+self.fichaPais);
-        }).catch(function (error) {
-          console.error(error);
-        });
+      verFichaCiudad(countryCode){
+        this.$router.push({name:"FichaCiudad",params:{countryCode:countryCode}})
       }
     }
 }
