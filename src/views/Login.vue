@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row align-h="center">
-      <b-col cols="12" sm="12" md="6" lg='6'>
+      <b-col cols="12" sm="12" md="12" lg='6'>
         <b-card class="mt-5">
           <template #header>
           <h1>Sing In</h1>
@@ -49,6 +49,7 @@
 </template>
 <script>
 import firebase from "firebase"
+import "@/firebase.js"
 export default {
   name:'Login',
   data(){

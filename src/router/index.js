@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import firebase from 'firebase'
+require('firebase/auth')
 import Login from '../views/Login.vue'
 import Ciudades from '../views/Ciudades.vue'
 import FichaCiudad from '../views/FichaCiudad.vue'
@@ -11,32 +13,46 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta:{guestOnly:true}
   },
   {
-    path: '/ciudades',
+    path: '/paises',
     name: 'Ciudades',
-    component: Ciudades
+    component: Ciudades,
+    meta:{requiresAuth:true}
   },
   {
-    path: '/ciudad/:countryCode',
+    path: '/paises/countrycode=:countryCode',
     name: 'FichaCiudad',
-    component: FichaCiudad
+    component: FichaCiudad,
+    meta:{requiresAuth:true}
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  { 
+    path: '*', 
+    redirect: '/paises'
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach(async(to, from, next) => {
+
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  const guestOnly = to.matched.some(record => record.meta.guestOnly);
+  if (requiresAuth && !await firebase.getCurrentUser()){
+    next('login');
+  }
+  else if(guestOnly && await firebase.getCurrentUser()){
+    next('/');
+  }
+  else{
+    next();
+  }
 })
 
 export default router
