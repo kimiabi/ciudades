@@ -6,7 +6,7 @@
         <h2 class="mb-0">Paises</h2>
       </template>
       <b-card-body>
-        <datatable :data="data" :columns="columns" :actions="actions" :index="false"></datatable>
+        <datatable :data="data" :columns="columns" :actions="actions" :size="sm" :index="false"></datatable>
       </b-card-body>
     </b-card>
   </b-container>
@@ -34,7 +34,7 @@ export default {
           {name:"population", th:"population"},
         ],
         actions:[
-          { text:"Ver Ficha",color:"secondary",action:(row)=>{this.verFichaCiudad(row.alpha3Code);}}
+          { text:"Ver Ficha",color:"secondary",size:"sm",action:(row)=>{this.verFichaCiudad(row.alpha3Code);}}
         ]
       }
     },
