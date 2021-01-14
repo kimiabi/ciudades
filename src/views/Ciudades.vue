@@ -6,7 +6,7 @@
         <h2 class="mb-0">Paises</h2>
       </template>
       <b-card-body>
-        <datatable :data="data" :columns="columns" :actions="actions" :loading="spinner" :index="false"></datatable>
+        <datatable :data="data" :columns="columns" :actions="actions" :index="false"></datatable>
       </b-card-body>
     </b-card>
   </b-container>
@@ -34,7 +34,7 @@ export default {
           {name:"population", th:"population"},
         ],
         actions:[
-          { text:"Ver Ficha",color:"primary",action:(row)=>{this.verFichaCiudad(row.alpha3Code);}}
+          { text:"Ver Ficha",color:"secondary",action:(row)=>{this.verFichaCiudad(row.alpha3Code);}}
         ]
       }
     },
@@ -55,7 +55,6 @@ export default {
 
         axios.request(options).then(function (response) {
           self.data = response.data;
-          console.log("ciudades "+self.data);
         }).catch(function (error) {
           console.error(error);
         });        

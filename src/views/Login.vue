@@ -4,12 +4,14 @@
       <b-col cols="12" sm="12" md="12" lg='6'>
         <b-card class="mt-5">
           <template #header>
-          <h1>Sing In</h1>
+          <h1>Ingreso</h1>
           </template>
           <b-card-body>
-          <b-form> 
-            <b-button type="submit" variant="primary">Fb</b-button>
-            <b-button type="reset" variant="danger">Google</b-button>
+          <b-form @submit.stop.prevent @submit="autenticar">
+            <div class="mb-4">
+              <b-button type="submit" variant="primary">Iniciar con Facebook</b-button>
+              <b-button class="ml-2" type="submit" variant="danger">Iniciar con Google</b-button>
+            </div>
             <b-form-group
               id="input-group-1"
               label="Email"
@@ -39,7 +41,7 @@
               >
               </b-form-input>
             </b-form-group>
-            <b-button @click="autenticar" variant="primary">Ingresar</b-button>   
+            <b-button type="submit" variant="secondary">Iniciar sesion</b-button>   
         </b-form>
           </b-card-body> 
         </b-card>

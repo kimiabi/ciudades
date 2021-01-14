@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-4" style="border-bottom: 1px solid #e0dcdc;">
     <b-navbar class="toolbar" type="light">
       <b-navbar-nav class="ml-auto">
         <b-nav-item href="#" style="padding-right:5px; margin-top:5px">
@@ -11,11 +11,8 @@
           <b-navbar-nav></b-navbar-nav>
           <b-navbar-nav class="ml-auto">
             <b-nav-item href="#" style="padding-right:5px; margin-top:5px">
-              <strong>Salir</strong>
-            </b-nav-item>
-            <b-nav-item>
-              <p class="h3 mb-2" @click="cerrarSesion"><b-icon icon="power"></b-icon></p>
-            </b-nav-item>            
+              <strong @click="cerrarSesion">Cerrar sesion</strong>
+            </b-nav-item>           
           </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -41,6 +38,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-
-</style>
