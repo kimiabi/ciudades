@@ -24,4 +24,18 @@ firebase.getCurrentUser = () => {
     })
   };
 
+export const googleAuth = {
+    auth: firebase.auth(),
+    login() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+      .then(data => {
+        console.log("Exito! "+data.user)
+      })
+      .catch(err =>{
+        console.log("Error "+err);
+        })
+    }
+}
+
 export default firebase;

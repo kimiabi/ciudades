@@ -9,8 +9,8 @@
           <b-card-body>
           <b-form @submit.stop.prevent @submit="autenticar">
             <div class="mb-4">
-              <b-button type="submit" variant="primary">Iniciar con Facebook</b-button>
-              <b-button class="ml-2" type="submit" variant="danger">Iniciar con Google</b-button>
+              <b-button variant="primary">Iniciar con Facebook</b-button>
+              <b-button class="ml-2" @click="autenticarGoogle" variant="danger">Iniciar con Google</b-button>
             </div>
             <b-form-group
               id="input-group-1"
@@ -36,7 +36,7 @@
                 v-model="password"
                 type="password"
 
-                placeholder="Ingresar tu contrasena"
+                placeholder="Ingresar contraseña"
                 required
               >
               </b-form-input>
@@ -51,7 +51,7 @@
 </template>
 <script>
 import firebase from "firebase"
-import "@/firebase.js"
+import {googleAuth} from "@/firebase.js"
 export default {
   name:'Login',
   data(){
@@ -70,6 +70,14 @@ export default {
       .catch(err =>{
         console.log("Error "+err);
       })
+    },
+    autenticarGoogle(){
+      googleAuth.login();
+      firebase.auth().onAuthStateChanged(user =>{
+         if(user){
+           this.$router.push({name:"Ciudades"});
+         }
+      });
     }
   }
 }
